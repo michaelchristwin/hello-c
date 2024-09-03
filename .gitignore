@@ -1,1 +1,3 @@
 bin/
+src/basics.o
+src/main.o
