@@ -65,5 +65,8 @@ int main() {
   }
 
   fclose(f);
+  printf("Memory\n");
+  printf("--------------------\n");
+  tinker_mem();
   return 0;
 }
