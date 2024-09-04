@@ -17,27 +17,6 @@ int main() {
   char s[1000];
   int i, t, x, y;
 
-  // Fill array
-  for (i = 0; i < MAX; i++) {
-    a[i] = rand();
-    printf("%d\n", a[i]);
-  }
-
-  // Sort array
-  for (x = 0; x < MAX - 1; x++)
-    for (y = 0; y < MAX - x - 1; y++)
-      if (a[y] > a[y + 1]) {
-        t = a[y];
-        a[y] = a[y + 1];
-        a[y + 1] = t;
-      }
-
-  /* Print sorted array */
-  printf("--------------------\n");
-  for (i = 0; i < MAX; i++)
-    printf("%d\n", a[i]);
-  printf("--------------------\n");
-
   int sum = add(30, 26);
   int difference = subtract(60, 29);
   printf("Sum = %d\n", sum);
@@ -68,5 +47,8 @@ int main() {
   printf("Memory\n");
   printf("--------------------\n");
   tinker_mem();
+  printf("Loops\n");
+  printf("--------------------\n");
+  loops();
   return 0;
 }

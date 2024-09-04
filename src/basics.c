@@ -16,3 +16,12 @@ void tinker_mem() {
   *q = 20;
   printf("%d\n", *q);
 }
+void loops() {
+  int i, n;
+  i = 0;
+  n = 10;
+  while (i < n) {
+    i++;
+    printf("i = %i\n", i);
+  }
+}
