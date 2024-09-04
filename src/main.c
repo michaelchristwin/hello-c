@@ -50,5 +50,6 @@ int main() {
   printf("Loops\n");
   printf("--------------------\n");
   loops();
+  random_basics();
   return 0;
 }
