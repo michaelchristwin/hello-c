@@ -1,12 +1,22 @@
 #include "../include/basics.h"
+#include <openssl/aes.h>
+#include <openssl/conf.h>
+#include <openssl/err.h>
+#include <openssl/evp.h>
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <time.h>
 /* C99 only */
 #define NUM_SUITS 4
 #define NUM_RANKS 13
 #define N 10
+
+void handleErrors(void) {
+  ERR_print_errors_fp(stderr);
+  abort();
+}
 
 int add(int a, int b) { return a + b; }
 
@@ -76,4 +86,35 @@ void random_basics() {
     }
   }
   printf("\n");
+}
+// Encryption
+int encryptor(unsigned char *plaintext, int plaintext_len, unsigned char *key,
+              unsigned char *iv, unsigned char *ciphertext) {
+  EVP_CIPHER_CTX *ctx;
+
+  int len;
+  int ciphertext_len;
+
+  // Create and initialize the context
+  if (!(ctx = EVP_CIPHER_CTX_new()))
+    handleErrors();
+
+  // Initialize the encryption operation with AES-128-CBC
+  if (1 != EVP_EncryptInit_ex(ctx, EVP_aes_128_cbc(), NULL, key, iv))
+    handleErrors();
+
+  // Provide the message to be encrypted and obtain the encrypted output
+  if (1 != EVP_EncryptUpdate(ctx, ciphertext, &len, plaintext, plaintext_len))
+    handleErrors();
+  ciphertext_len = len;
+
+  // Finalize the encryption
+  if (1 != EVP_EncryptFinal_ex(ctx, ciphertext + len, &len))
+    handleErrors();
+  ciphertext_len += len;
+
+  // Clean up
+  EVP_CIPHER_CTX_free(ctx);
+
+  return ciphertext_len;
 }

@@ -1,5 +1,7 @@
 #include "../include/basics.h"
+#include <openssl/aes.h>
 #include <stdio.h>
+#include <stdlib.h>
 #define MAX 10
 
 int a[MAX];
@@ -51,5 +53,46 @@ int main() {
   printf("--------------------\n");
   loops();
   random_basics();
+  unsigned char *key = (unsigned char *)"0123456789012345"; // 16 bytes key
+  unsigned char *iv = (unsigned char *)"0123456789012345";  // 16 bytes IV
+
+  // Open the input file
+  FILE *inputFile = fopen("input.txt", "rb");
+  if (inputFile == NULL) {
+    perror("File open error");
+    return EXIT_FAILURE;
+  }
+
+  // Get the file size
+  fseek(inputFile, 0, SEEK_END);
+  long fileSize = ftell(inputFile);
+  fseek(inputFile, 0, SEEK_SET);
+
+  // Read the file contents
+  unsigned char *plaintext = (unsigned char *)malloc(fileSize);
+  fread(plaintext, 1, fileSize, inputFile);
+  fclose(inputFile);
+
+  // Allocate memory for ciphertext
+  unsigned char *ciphertext =
+      (unsigned char *)malloc(fileSize + AES_BLOCK_SIZE);
+
+  // Encrypt the plaintext
+  int ciphertext_len = encryptor(plaintext, fileSize, key, iv, ciphertext);
+
+  // Write the ciphertext to a file
+  FILE *outputFile = fopen("output.enc", "wb");
+  if (outputFile == NULL) {
+    perror("File open error");
+    return EXIT_FAILURE;
+  }
+  fwrite(ciphertext, 1, ciphertext_len, outputFile);
+  fclose(outputFile);
+
+  // Clean up
+  free(plaintext);
+  free(ciphertext);
+
+  return 0;
   return 0;
 }
