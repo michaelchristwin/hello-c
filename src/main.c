@@ -23,6 +23,7 @@ int main() {
   int difference = subtract(60, 29);
   printf("Sum = %d\n", sum);
   printf("Difference = %d\n", difference);
+  printf("");
 
   // Open file for both reading and writing
   f = fopen("output.txt", "r+");
