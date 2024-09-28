@@ -182,3 +182,12 @@ void print_result(void) {
     printf("High card");
   printf("\n\n");
 }
+int *p;
+double *q;
+char *r;
+
+/* points only to integers
+ */
+/* points only to doubles
+ */
+/* points only to characters */
