@@ -1,6 +1,4 @@
-#include "../include/basics.h"
-#include <openssl/aes.h>
-#include <stdio.h>
+#include "../include/drchuck.h"
 #include <stdlib.h>
 #define MAX 10
 
@@ -15,85 +13,96 @@ int rand() {
 }
 
 int main() {
-  FILE *f;
-  char s[1000];
-  int i, t, x, y;
+  // FILE *f;
+  // char s[1000];
+  // int i, t, x, y;
 
-  int sum = add(30, 26);
-  int difference = subtract(60, 29);
-  printf("Sum = %d\n", sum);
-  printf("Difference = %d\n", difference);
-  printf("");
+  // int sum = add(30, 26);
+  // int difference = subtract(60, 29);
+  // printf("Sum = %d\n", sum);
+  // printf("Difference = %d\n", difference);
+  // printf("");
 
-  // Open file for both reading and writing
-  f = fopen("output.txt", "r+");
-  if (!f) {
-    perror("Error opening file");
-    return 1;
-  }
+  // // Open file for both reading and writing
+  // f = fopen("output.txt", "r+");
+  // if (!f) {
+  //   perror("Error opening file");
+  //   return 1;
+  // }
 
-  // Write to the file
-  for (x = 1; x <= MAX; x++) {
-    fprintf(f, "%d\n", x);
-  }
+  // // Write to the file
+  // for (x = 1; x <= MAX; x++) {
+  //   fprintf(f, "%d\n", x);
+  // }
 
-  // Reposition file pointer to the beginning for reading
-  rewind(f);
+  // // Reposition file pointer to the beginning for reading
+  // rewind(f);
 
-  // Read from the file
-  printf("File contents:\n");
-  while (fgets(s, sizeof(s), f) != NULL) {
-    printf("%s", s); // fgets includes the newline character, so no need for \n
-  }
+  // // Read from the file
+  // printf("File contents:\n");
+  // while (fgets(s, sizeof(s), f) != NULL) {
+  //   printf("%s", s); // fgets includes the newline character, so no need for
+  //   \n
+  // }
 
-  fclose(f);
-  printf("Memory\n");
-  printf("--------------------\n");
-  tinker_mem();
-  printf("Loops\n");
-  printf("--------------------\n");
-  loops();
-  random_basics();
-  unsigned char *key = (unsigned char *)"0123456789012345"; // 16 bytes key
-  unsigned char *iv = (unsigned char *)"0123456789012345";  // 16 bytes IV
+  // fclose(f);
+  // printf("Memory\n");
+  // printf("--------------------\n");
+  // tinker_mem();
+  // printf("Loops\n");
+  // printf("--------------------\n");
+  // loops();
+  // random_basics();
+  // unsigned char *key = (unsigned char *)"0123456789012345"; // 16 bytes key
+  // unsigned char *iv = (unsigned char *)"0123456789012345";  // 16 bytes IV
 
-  // Open the input file
-  FILE *inputFile = fopen("input.txt", "rb");
-  if (inputFile == NULL) {
-    perror("File open error");
-    return EXIT_FAILURE;
-  }
+  // // Open the input file
+  // FILE *inputFile = fopen("input.txt", "rb");
+  // if (inputFile == NULL) {
+  //   perror("File open error");
+  //   return EXIT_FAILURE;
+  // }
 
-  // Get the file size
-  fseek(inputFile, 0, SEEK_END);
-  long fileSize = ftell(inputFile);
-  fseek(inputFile, 0, SEEK_SET);
+  // // Get the file size
+  // fseek(inputFile, 0, SEEK_END);
+  // long fileSize = ftell(inputFile);
+  // fseek(inputFile, 0, SEEK_SET);
 
-  // Read the file contents
-  unsigned char *plaintext = (unsigned char *)malloc(fileSize);
-  fread(plaintext, 1, fileSize, inputFile);
-  fclose(inputFile);
+  // // Read the file contents
+  // unsigned char *plaintext = (unsigned char *)malloc(fileSize);
+  // fread(plaintext, 1, fileSize, inputFile);
+  // fclose(inputFile);
 
-  // Allocate memory for ciphertext
-  unsigned char *ciphertext =
-      (unsigned char *)malloc(fileSize + AES_BLOCK_SIZE);
+  // // Allocate memory for ciphertext
+  // unsigned char *ciphertext =
+  //     (unsigned char *)malloc(fileSize + AES_BLOCK_SIZE);
 
-  // Encrypt the plaintext
-  int ciphertext_len = encryptor(plaintext, fileSize, key, iv, ciphertext);
+  // // Encrypt the plaintext
+  // int ciphertext_len = encryptor(plaintext, fileSize, key, iv, ciphertext);
 
-  // Write the ciphertext to a file
-  FILE *outputFile = fopen("output.enc", "wb");
-  if (outputFile == NULL) {
-    perror("File open error");
-    return EXIT_FAILURE;
-  }
-  fwrite(ciphertext, 1, ciphertext_len, outputFile);
-  fclose(outputFile);
+  // // Write the ciphertext to a file
+  // FILE *outputFile = fopen("output.enc", "wb");
+  // if (outputFile == NULL) {
+  //   perror("File open error");
+  //   return EXIT_FAILURE;
+  // }
+  // fwrite(ciphertext, 1, ciphertext_len, outputFile);
+  // fclose(outputFile);
 
-  // Clean up
-  free(plaintext);
-  free(ciphertext);
-
-  return 0;
+  // // Clean up
+  // free(plaintext);
+  // free(ciphertext);
+  char dontcheat[10];
+  dontcheat[0] = 'L';
+  dontcheat[1] = 'O';
+  dontcheat[2] = 'B';
+  dontcheat[3] = 'O';
+  dontcheat[4] = 'T';
+  dontcheat[5] = 'O';
+  dontcheat[6] = 'M';
+  dontcheat[7] = 'I';
+  dontcheat[8] = 'Z';
+  dontcheat[9] = '\0';
+  reverse_string(dontcheat);
   return 0;
 }

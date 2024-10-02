@@ -1,10 +1,16 @@
 #include <stdio.h>
+#include <string.h>
 
 /*Muliplier's prototype*/
 int mymult(int a, int b);
 
-// Main function
-int main() {
+/*Dr Chuck's Course Main fuction*/
+int drchuck_main();
+
+/*Reverse a string in place*/
+void reverse_string(char dontcheat[10]);
+
+int drchuck_main() {
   int retval;
   char line[1000];
   FILE *hand;
@@ -13,10 +19,21 @@ int main() {
     printf("%s", line);
   }
   retval = mymult(6, 7);
+  return retval;
 }
 
-// Muliplier's function statment
 int mymult(int a, int b) {
   int c = a * b;
   return c;
+}
+
+void reverse_string(char dontcheat[10]) {
+  int length = strlen(dontcheat);
+  char temp;
+  printf("Length of string is %d\n", length);
+  for (int p = 0; p < (length - 1) / 2; p++) {
+    temp = dontcheat[p];
+    dontcheat[p] = dontcheat[length - 1 - p];
+    dontcheat[length - 1 - p] = temp;
+  }
 }

@@ -1,6 +1,6 @@
 CC = gcc
 CFLAGS = -I../include
-SRC = src/main.c src/basics.c
+SRC = src/main.c src/drchuck.c
 OBJ = $(SRC:.c=.o)  # Object files for each source file
 TARGET = bin/hello_c
 
