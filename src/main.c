@@ -92,7 +92,7 @@ int main() {
   // // Clean up
   // free(plaintext);
   // free(ciphertext);
-  char dontcheat[10];
+  char dontcheat[13];
   dontcheat[0] = 'L';
   dontcheat[1] = 'O';
   dontcheat[2] = 'B';
@@ -102,7 +102,10 @@ int main() {
   dontcheat[6] = 'M';
   dontcheat[7] = 'I';
   dontcheat[8] = 'Z';
-  dontcheat[9] = '\0';
+  dontcheat[9] = 'E';
+  dontcheat[10] = 'P';
+  dontcheat[11] = 'I';
+  dontcheat[12] = '\0';
   reverse_string(dontcheat);
   return 0;
 }

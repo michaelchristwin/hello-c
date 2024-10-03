@@ -1,3 +1,3 @@
 extern int mymult(int a, int b);
-extern void reverse_string(char dontcheat[10]);
+extern void reverse_string(char dontcheat[]);
 extern int drchuck_main();
